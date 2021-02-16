@@ -8,6 +8,8 @@ import { IMessage } from "./models/IMessage";
 import { getMessages } from "./service/message.service";
 import { Login } from "./login/login";
 import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
 
 export function App() {
   const [messages, setMessages] = useState<IMessage[]>([]);
@@ -19,11 +21,11 @@ export function App() {
   const hideLoginPage = val => {
     setLogin(val);
   };
-  useEffect(() => {
-    getMessages().then((messages: IMessage[]) => {
-      setMessages(messages);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getMessages().then((messages: IMessage[]) => {
+  //     setMessages(messages);
+  //   });
+  // }, []);
   const showInputValue = (inputValue: string) => {
     setMessages([
       ...messages,
@@ -34,6 +36,15 @@ export function App() {
         isOwn: true
       }
     ]);
+    firebase
+      .database()
+      .ref("chat/" + (messages.length + 1))
+      .set({
+        content: inputValue,
+        id: messages.length + 1,
+        datetime: "nodate",
+        isOwn: true
+      });
   };
   return (
     <div className={"main"}>
@@ -55,12 +66,5 @@ const config = {
 firebase.initializeApp(config);
 
 // Get a reference to the database service
-
-firebase.database();
-//   .ref("users/" + 1)
-//   .set({
-//     username: "THE NAME",
-//     email: "Mail"
-//   });
 
 render(<App />, document.getElementById("root"));
