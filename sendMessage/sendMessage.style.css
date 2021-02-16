@@ -1,0 +1,25 @@
+.sendMessage {
+  border: rgb(151, 149, 149) solid thin;
+  height: 40px;
+  padding: 5px;
+  border-top: white;
+  border-radius: 0px 0px 5px 5px;
+  display: flex;
+}
+
+.input {
+  outline: none;
+  width: 95%;
+  height: 35px;
+  border: none;
+}
+
+.send {
+  background-color: rgb(130, 128, 246);
+  height: 25px;
+  width: 40px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: small;
+  margin-top: 10px;
+}

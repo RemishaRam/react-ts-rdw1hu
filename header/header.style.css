@@ -1,0 +1,15 @@
+.header {
+  text-align: center;
+  border: rgb(151, 149, 149) solid thin;
+  height: 20px;
+  padding: 5px;
+  border-radius: 5px 5px 0px 0px;
+}
+.logout {
+  font-size: small;
+  background-color: rgb(180, 178, 178);
+  margin-left: 180px;
+  border-radius: 3px;
+  margin-top: -15px;
+  cursor: pointer;
+}

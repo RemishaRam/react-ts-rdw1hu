@@ -1,0 +1,20 @@
+.messageList {
+  border: rgb(151, 149, 149) solid thin;
+  height: 250px;
+  padding: 5px;
+  border-top: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.message-item {
+  background-color: rgb(130, 128, 246);
+  max-width: 75%;
+  border-radius: 5px;
+  margin-top: 5px;
+  word-wrap: break-word;
+  padding: 10px;
+}
+.message-item.own {
+  margin-left: auto;
+  background-color: rgb(171, 215, 255);
+}
