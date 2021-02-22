@@ -5,7 +5,7 @@ import { SendMessage } from "./sendMessage/sendMessage";
 import { Header } from "./header/header";
 import { MessageList } from "./messageList/messageList";
 import { IMessage } from "./models/IMessage";
-import { getMessages } from "./service/message.service";
+import { MessageService } from "./service/message.service";
 import { Login } from "./login/login";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -21,30 +21,21 @@ export function App() {
   const hideLoginPage = val => {
     setLogin(val);
   };
-  // useEffect(() => {
-  //   getMessages().then((messages: IMessage[]) => {
-  //     setMessages(messages);
-  //   });
-  // }, []);
+  useEffect(() => {
+    MessageService.subscribeMessages(messageMap => {
+      const messages: IMessage[] = Object.keys(messageMap)
+        .map(key => messageMap[key])
+        .filter(message => !!message);
+      setMessages(messages);
+    });
+  }, []);
   const showInputValue = (inputValue: string) => {
-    setMessages([
-      ...messages,
-      {
-        content: inputValue,
-        id: messages.length + 1,
-        datetime: "nodate",
-        isOwn: true
-      }
-    ]);
-    firebase
-      .database()
-      .ref("chat/" + (messages.length + 1))
-      .set({
-        content: inputValue,
-        id: messages.length + 1,
-        datetime: "nodate",
-        isOwn: true
-      });
+    MessageService.sendMessage({
+      content: inputValue,
+      id: messages.length + 1,
+      datetime: "nodate",
+      isOwn: true
+    });
   };
   return (
     <div className={"main"}>
@@ -57,13 +48,6 @@ export function App() {
 }
 
 console.log(123);
-const config = {
-  apiKey: "AIzaSyALCZC1URHfqXFZOwAwHVG-SvjiYHTkKSg",
-  authDomain: "rbmessenger-8b744.firebaseapp.com.firebaseapp.com",
-  databaseURL: "https://rbmessenger-8b744-default-rtdb.firebaseio.com/",
-  storageBucket: "rbmessenger-8b744.appspot.com.appspot.com"
-};
-firebase.initializeApp(config);
 
 // Get a reference to the database service
 
