@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-  firebaseAuthConfig,
-  FirebaseAuthConfig
-} from "../constants/auth.firebase.config";
+import { firebaseAuthConfig } from "../constants/auth.firebase.config";
 import { AuthenticationService } from "../service/authentication.service";
 import firebase from "firebase";
 import { StyledFirebaseAuth } from "react-firebaseui";
@@ -38,7 +35,7 @@ export class FirebaseLogin extends React.Component<IProps, IState> {
         <p>Please sign-in:</p>
         <StyledFirebaseAuth
           uiConfig={firebaseAuthConfig}
-          firebaseAuth={firebase.auth()}
+          firebaseAuth={AuthenticationService.getAuth()}
         />
       </div>
     );

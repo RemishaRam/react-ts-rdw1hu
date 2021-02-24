@@ -7,6 +7,10 @@ export class AuthenticationService extends FirebaseService {
     this.getInstance();
   }
 
+  public static getAuth() {
+    return firebase.auth();
+  }
+
   public static signIn() {
     // initialize firebase
   }
